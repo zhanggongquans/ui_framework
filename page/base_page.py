@@ -28,6 +28,6 @@ class BasePage:
             if "by" in step.keys():
                 element = self.find(step["by"], step["locator"])
             if "action" in step.keys():
-                action = step.keys()
+                action = step["action"]
                 if action == "click":
                     element.click()
