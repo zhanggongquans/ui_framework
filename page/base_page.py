@@ -1,5 +1,6 @@
 import yaml
 from appium.webdriver.webdriver import WebDriver
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -7,6 +8,7 @@ class BasePage:
     定义基础类
     '''
     _driver: WebDriver
+    _black_list = [(By.ID, "iv_close")]
 
     '''
     初始化 driver
@@ -20,7 +22,17 @@ class BasePage:
     '''
 
     def find(self, locator, value):
-        return self._driver.find_element(locator, value)
+        try:
+            element = self._driver.find_element(locator, value)
+            return element
+        except:
+            for black in self._black_list:
+                elements = self._driver.find_elements(*black)
+                if len(elements) > 0:
+                    elements[0].click()
+                    break
+            #c处理完黑名单后继续寻找元素
+            return self.find(locator, value)
 
     def click(self, locator, value):
         return self._driver.find_element(locator, value).click()
