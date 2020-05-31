@@ -16,10 +16,18 @@ class BasePage:
         self._driver = driver
 
     '''
-    封装find方法
+    公共配置在po里面封装
     '''
+
     def find(self, locator, value):
         return self._driver.find_element(locator, value)
+
+    def click(self, locator, value):
+        return self._driver.find_element(locator, value).click()
+
+    '''
+    测试步骤的封装
+    '''
 
     def steps(self, path):
         with open(path, encoding='utf-8') as f:
