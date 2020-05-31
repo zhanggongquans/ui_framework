@@ -1,6 +1,7 @@
 from time import sleep
 
-from selenium import webdriver
+from appium import webdriver
+from selenium.webdriver.common.by import By
 
 from page.base_page import BasePage
 from page.main import Main
@@ -26,7 +27,7 @@ class App(BasePage):
             cap["noReset"] = "true"
             cap["unicodeKeyboard"] = "true"
             self._driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", cap)
-            self._driver.implicitly_wait(15)
+            self._driver.implicitly_wait(20)
         else:
             self._driver.start_activity(self._activity, self._package)
 

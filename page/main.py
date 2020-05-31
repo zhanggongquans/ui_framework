@@ -9,4 +9,5 @@ class Main(BasePage):
     进入搜索页
     '''
     def goto_search(self):
-        self.find(By.ID, 'tv_search').click()
+        # self.find(By.ID, 'tv_search').click()
+        self.steps("../page/data.yml")
